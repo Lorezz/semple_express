@@ -39,11 +39,15 @@ app.get("/sign", (req, res) => {
 app.get("/check",  async (req, res) => {
   // spawn
   await do_spawn("ls", ["-al"])
-
   // exec
   await do_exec("ls -al")
+  res.json({ msg: "ok you can pass" });
+});
 
-
+// ROUTE THAT WORK ONLY IF AUTHORED, with async/await child-process
+app.get("/private", validateToken,  async (req, res) => {
+  // exec
+  await do_exec("ls -al")
   res.json({ msg: "ok you can pass" });
 });
 
