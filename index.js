@@ -35,19 +35,19 @@ app.get("/sign", (req, res) => {
   res.json({ token });
 });
 
-// ROUTE THAT WORK ONLY IF AUTHORED, with async/await child-process
+// ROUTE THAT call ls with async/await child-process
 app.get("/check",  async (req, res) => {
   // spawn
   await do_spawn("ls", ["-al"])
   // exec
   await do_exec("ls -al")
-  res.json({ msg: "ok you can pass" });
+  res.json({ msg: "ok done" });
 });
 
-// ROUTE THAT WORK ONLY IF AUTHORED, with async/await child-process
+// ROUTE THAT WORK ONLY IF AUTHORIZED
 app.get("/private", validateToken,  async (req, res) => {
   // exec
-  await do_exec("ls -al")
+  await do_exec("echo 'ciao' ")
   res.json({ msg: "ok you can pass" });
 });
 
